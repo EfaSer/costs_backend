@@ -1,13 +1,22 @@
 from django.db import models
 
 class Cost(models.Model):
-  CHOICES = (
-    ("Supermarkets", "Supermarkets"),
-    ("Accounts", "Accounts"),
-    ("Other", "Other")
-  )
+  """Модель расходов"""
+  description = models.TextField(max_length=255, verbose_name="Описание")
+  amount = models.FloatField(max_length=255, verbose_name="Цена")
+  date = models.TextField(verbose_name="Дата")
+  category = models.ForeignKey("Category", on_delete=models.PROTECT)
+  class Meta:
+    verbose_name_plural = "Расходы"
 
-  description = models.TextField()
-  amount = models.FloatField()
-  date = models.TextField()
-  category = models.CharField(max_length=15, choices=CHOICES)
+
+class Category(models.Model):
+  """Модель категорий"""
+  name = models.CharField(max_length=30, verbose_name="Категория")
+  slug = models.SlugField(max_length=30, unique=True, verbose_name="URL")
+
+  class Meta:
+    verbose_name_plural = "Расходы"
+
+  def __str__(self) -> str:
+    return self.name
