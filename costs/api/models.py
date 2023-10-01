@@ -5,7 +5,7 @@ class Cost(models.Model):
   description = models.TextField(max_length=255, verbose_name="Описание")
   amount = models.FloatField(max_length=255, verbose_name="Цена")
   date = models.TextField(verbose_name="Дата")
-  category = models.ForeignKey("Category", on_delete=models.PROTECT)
+  category = models.ForeignKey("Category", on_delete=models.PROTECT, related_name='category')
   class Meta:
     verbose_name_plural = "Расходы"
 
