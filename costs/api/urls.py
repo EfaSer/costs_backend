@@ -5,8 +5,6 @@ from .views import CostsViewSet, CategorysViewSet, CostsCategoryViewSet
 
 router = DefaultRouter()
 router.register('costs', CostsViewSet)
-# router.register('^costs-category/(?P<slug>.+)/$', CostsCategoryViewSet, basename='costs_category')
-# router.register('costs-category/<str:category_slug>/', CostsCategoryViewSet, basename='costs_category')
 router.register('category', CategorysViewSet)
 
 urlpatterns = [
