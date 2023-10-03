@@ -2,8 +2,16 @@ from rest_framework import serializers
 from .models import Cost, Category
 
 
-class CostSerializer(serializers.ModelSerializer):
-  category = serializers.StringRelatedField()
+class CreateCostSerializer(serializers.ModelSerializer):
+  category = serializers.SlugRelatedField(slug_field='slug', queryset=Category.objects.all())
+
+  class Meta:
+    model = Cost
+    fields = '__all__'
+
+
+class ListCostSerializer(serializers.ModelSerializer):
+  category = serializers.SlugRelatedField(slug_field='name', queryset=Category.objects.all())
 
   class Meta:
     model = Cost
@@ -11,7 +19,7 @@ class CostSerializer(serializers.ModelSerializer):
 
 
 class CategorySerializer(serializers.ModelSerializer):
-  
+
   class Meta:
     model = Category
     fields = '__all__'

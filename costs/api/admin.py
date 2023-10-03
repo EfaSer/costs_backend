@@ -8,6 +8,7 @@ class CostAdmin(admin.ModelAdmin):
   list_filter = ("category",)
 
 class CategoryAdmin(admin.ModelAdmin):
+  prepopulated_fields = {'slug': ('name',)}
   search_fields = ("name__startwith",)
   list_display = ("name", "slug")
   list_filter = ("name",)

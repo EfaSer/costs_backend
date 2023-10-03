@@ -1,16 +1,18 @@
 from rest_framework import viewsets
-from rest_framework.decorators import api_view
 from rest_framework.response import Response
-from django.http import HttpResponse
-from django.shortcuts import get_object_or_404
 from .models import Cost, Category
-from .serializers import CostSerializer, CategorySerializer
+from .serializers import ListCostSerializer, CreateCostSerializer, CategorySerializer
 from rest_framework.exceptions import NotFound
 
 
 class CostsViewSet(viewsets.ModelViewSet):
-  serializer_class = CostSerializer
   queryset = Cost.objects.all()
+
+  def get_serializer_class(self):
+    if self.request.method == 'GET':
+      return ListCostSerializer
+    else:
+      return CreateCostSerializer
 
 
 class CategorysViewSet(viewsets.ModelViewSet):
@@ -19,7 +21,7 @@ class CategorysViewSet(viewsets.ModelViewSet):
 
 
 class CostsCategoryViewSet(viewsets.ModelViewSet):
-    serializer_class = CostSerializer
+    serializer_class = ListCostSerializer
     queryset = Cost.objects.all()
 
     def retrieve(self, request, *args, **kwargs):
