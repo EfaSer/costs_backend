@@ -24,7 +24,6 @@ class CostsCategoryViewSet(viewsets.ModelViewSet):
 
     def retrieve(self, request, *args, **kwargs):
         category_slug = kwargs.get('category_slug')
-        print("FFFFFFF")
         category = Category.objects.filter(slug=category_slug).first()
         if not category:
             raise NotFound('Category not found')
